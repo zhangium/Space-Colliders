@@ -637,7 +637,7 @@ def game():
 
         #Generate aliens
         frameCnt += 1
-        if frameCnt % 100 == 0:
+        if frameCnt % 200 == 0:
             createAliens()
             
         times = levelTimes[level]*1000-(timeElapse) #Time left
@@ -647,7 +647,11 @@ def game():
             return "GAME OVER"
 
         myFont = font.SysFont("impact",20)
-        timer = myFont.render("Time Left: "+(str(times/1000)),1,(255,10,10))
+        if (times // 1000) % 10 == 0:
+            timer = myFont.render("Time Left: "+(str(times/1000)),1,(255,255,255))
+        else:
+            timer = myFont.render("Time Left: "+(str(times/1000)),1,(255,10,10))
+        
         levelIcon = myFont.render("Level: "+str(level),1,(255,10,10))
         healthIcon = myFont.render("Health: "+str(int(player.health)),1,(255,10,10))
         screen.blit(levelIcon,(10,10))
